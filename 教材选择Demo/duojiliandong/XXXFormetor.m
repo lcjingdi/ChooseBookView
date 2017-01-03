@@ -21,7 +21,7 @@
     for (int i = 0; i < 2; i++) {
         
         [d setObject:@"七年级" forKey:@"title"];
-        [d2 setObject:@"景迪教版" forKey:@"title"];
+        [d2 setObject:@"人人教版" forKey:@"title"];
         NSMutableArray *arrayM = [NSMutableArray array];
         NSMutableArray *arrayM2 = [NSMutableArray array];
         for (int i = 0; i < [[dict objectForKey:@"grades"] count]; i++) {

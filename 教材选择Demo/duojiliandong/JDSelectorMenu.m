@@ -15,6 +15,7 @@
 @property (nonatomic, assign) NSInteger currentSelectedMenudIndex;
 @property (nonatomic, assign) BOOL show;
 @property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) NSDictionary *currentDictionary;
 @end
 
 @implementation JDSelectorMenu
@@ -27,7 +28,7 @@
         _currentSelectedMenudIndex = -1;
         _show = NO;
         
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(origin.x, self.frame.origin.y + self.frame.size.height, 0, 0) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(origin.x, self.frame.origin.y + self.frame.size.height, 0, 0) style:UITableViewStylePlain];
         _tableView.rowHeight = 38;
         _tableView.separatorColor = [UIColor colorWithRed:220.f/255.0f green:220.f/255.0f blue:220.f/255.0f alpha:1.0];
         _tableView.delegate = self;
@@ -41,6 +42,7 @@
 - (void)configWithData:(NSArray *)array {
     _dataArray = array;
     int j = [array count];
+    _numOfMenu = j;
     for (int i = 0; i < j; i++) {
         
         CGFloat y = 0;
@@ -86,7 +88,7 @@
 
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return [[self.currentDictionary objectForKey:@"subTitles"] count];
 }
 static NSString *identifier = @"selectorMenu";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,23 +99,34 @@ static NSString *identifier = @"selectorMenu";
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1.0];
     
-    cell.textLabel.text = [self.dataArray[indexPath.section] objectForKey:@"subTitles"][indexPath.row];
+    NSArray *array = [self.currentDictionary objectForKey:@"subTitles"];
+    
+    cell.textLabel.text = array[indexPath.row];
     
     return cell;
 }
 #pragma mark - event
 - (void)tapBgButton {
     self.bgButton.hidden = YES;
+    [self animateTableView:self.tableView show:NO complete:^{
+        
+    }];
 }
 - (void)taped:(UIGestureRecognizer *)reg {
     
     CGPoint touchPoint = [reg locationInView:self];
     NSInteger tapIndex = touchPoint.x / (self.frame.size.width / _numOfMenu);
-    
+    self.currentSelectedMenudIndex = tapIndex;
     [self.superview addSubview:self.bgButton];
     [self.bgButton.superview addSubview:self];
     NSLog(@"taped->%@",reg.view);
     self.bgButton.hidden = NO;
+    self.currentDictionary = self.dataArray[tapIndex];
+    [self.tableView reloadData];
+    [self animateTableView:self.tableView show:YES complete:^{
+        
+    }];
+    
 //    for (int i = 0; i < _numOfMenu; i++) {
 //        if (i != tapIndex) {
 //            
@@ -164,5 +177,13 @@ static NSString *identifier = @"selectorMenu";
         _dataArray = [NSArray array];
     }
     return _dataArray;
+}
+- (NSDictionary *)currentDictionary {
+    
+    if (_currentDictionary == nil) {
+        
+        _currentDictionary = [[NSDictionary alloc] init];
+    }
+    return _currentDictionary;
 }
 @end

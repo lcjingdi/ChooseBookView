@@ -49,10 +49,12 @@
 //    YYYFormetor *y = [[YYYFormetor alloc] init];
 //    self.DDDReformer = y;
     
-    [self.apiManager1 requestAData];
+    
 //    [self.apiManager2 requestBData];
 }
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.apiManager1 requestAData];
+}
 - (void)apiManagerDidSuccess:(APIManager *)manager {
     if (manager == self.apiManager1) {
         NSArray *reformedJJJData = [manager fetchDataWithReformer:self.JJJReformer];

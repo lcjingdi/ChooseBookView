@@ -11,6 +11,6 @@
 
 @protocol JDSelectProtocol <NSObject>
 
-- (NSDictionary *)reformDataWithManager:(APIManager *)manager;
+- (NSArray *)reformDataWithManager:(APIManager *)manager;
 
 @end

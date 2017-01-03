@@ -18,7 +18,7 @@
 @implementation APIManager
 
 - (void)requestAData {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"XXXPlist" ofType:@"plist"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"book" ofType:@"plist"];
     self.rawData = [NSDictionary dictionaryWithContentsOfFile:path];
     if (self.delegate && [self.delegate respondsToSelector:@selector(apiManagerDidSuccess:)]) {
         [self.delegate apiManagerDidSuccess:self];
@@ -31,9 +31,10 @@
         [self.delegate apiManagerDidSuccess:self];
     }
 }
-- (NSDictionary *)fetchDataWithReformer:(id<JDSelectProtocol>)reformer {
+- (NSArray *)fetchDataWithReformer:(id<JDSelectProtocol>)reformer {
     if (reformer == nil) {
-        return @{@"count":@3};
+//        return @{@"count":@3};
+        return nil;
     } else {
         return [reformer reformDataWithManager:self];
     }

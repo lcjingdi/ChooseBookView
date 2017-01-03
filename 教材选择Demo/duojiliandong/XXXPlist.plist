@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>sss</key>
+<array>
 	<dict>
-		<key>count</key>
-		<string>2</string>
+		<key>title</key>
+		<string>七年级上</string>
+		<key>subTitles</key>
+		<array>
+			<string>八年级上</string>
+			<string>八年级下</string>
+			<string>九年级上</string>
+			<string>九年级下</string>
+		</array>
 	</dict>
-</dict>
+	<dict>
+		<key>title</key>
+		<string>教材列表</string>
+		<key>subTitles</key>
+		<array>
+			<string>教材1</string>
+			<string>教材2</string>
+			<string>教材3</string>
+			<string>教材4</string>
+		</array>
+	</dict>
+</array>
 </plist>

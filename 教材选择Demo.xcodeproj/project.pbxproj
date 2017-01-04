@@ -22,6 +22,7 @@
 		1F4BAA2F1E165AED00EE3435 /* YYYFormetor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BAA2E1E165AED00EE3435 /* YYYFormetor.m */; };
 		1F4BAA311E1B537400EE3435 /* book.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F4BAA301E1B537400EE3435 /* book.plist */; };
 		1F4BAA351E1B908400EE3435 /* SelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BAA341E1B908400EE3435 /* SelectView.m */; };
+		1F4BAA4A1E1CDFC000EE3435 /* EKWSelectMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BAA491E1CDFC000EE3435 /* EKWSelectMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		1F4BAA301E1B537400EE3435 /* book.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = book.plist; sourceTree = "<group>"; };
 		1F4BAA331E1B908400EE3435 /* SelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectView.h; sourceTree = "<group>"; };
 		1F4BAA341E1B908400EE3435 /* SelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectView.m; sourceTree = "<group>"; };
+		1F4BAA481E1CDFC000EE3435 /* EKWSelectMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EKWSelectMenu.h; sourceTree = "<group>"; };
+		1F4BAA491E1CDFC000EE3435 /* EKWSelectMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EKWSelectMenu.m; sourceTree = "<group>"; };
 		882A16AD3510299D42F380BE /* Pods-教材选择Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-教材选择Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-教材选择Demo/Pods-教材选择Demo.release.xcconfig"; sourceTree = "<group>"; };
 		BF3720D0C467F3CC17F280F7 /* Pods-教材选择Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-教材选择Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-教材选择Demo/Pods-教材选择Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		EA321C370BA83201C36AF624 /* libPods-教材选择Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-教材选择Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +116,8 @@
 		1F4BAA1E1E16519500EE3435 /* duojiliandong */ = {
 			isa = PBXGroup;
 			children = (
+				1F4BAA481E1CDFC000EE3435 /* EKWSelectMenu.h */,
+				1F4BAA491E1CDFC000EE3435 /* EKWSelectMenu.m */,
 				1F4BAA1F1E16552800EE3435 /* JDSelectProtocol.h */,
 				1F4BAA201E16559700EE3435 /* APIManager.h */,
 				1F4BAA211E16559700EE3435 /* APIManager.m */,
@@ -282,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F4BAA221E16559700EE3435 /* APIManager.m in Sources */,
+				1F4BAA4A1E1CDFC000EE3435 /* EKWSelectMenu.m in Sources */,
 				1F4BAA0F1E16490600EE3435 /* ViewController.m in Sources */,
 				1F4BAA351E1B908400EE3435 /* SelectView.m in Sources */,
 				1F4BAA2C1E165AE400EE3435 /* XXXFormetor.m in Sources */,

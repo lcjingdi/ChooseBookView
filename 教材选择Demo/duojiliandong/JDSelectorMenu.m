@@ -61,6 +61,10 @@
         view.backgroundColor = [self randomColor];
         [self addSubview:view];
     }
+    [self animateTableView:self.tableView show:NO complete:^{
+        self.bgButton.hidden = YES;
+        self.currentSelectedMenudIndex = -1;
+    }];
 }
 
 #pragma mark - animation
@@ -85,7 +89,14 @@
 
 #pragma mark - 代理
 #pragma mark UITableViewDelegate
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self motifyWithSelectRow:indexPath.row];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(menu:didSelectRowAtIndexPath:)]) {
+        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:indexPath.row inSection:self.currentSelectedMenudIndex];
+        [self.delegate menu:self didSelectRowAtIndexPath:indexPath2];
+    }
+}
 #pragma mark UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[self.currentDictionary objectForKey:@"subTitles"] count];
@@ -116,16 +127,29 @@ static NSString *identifier = @"selectorMenu";
     
     CGPoint touchPoint = [reg locationInView:self];
     NSInteger tapIndex = touchPoint.x / (self.frame.size.width / _numOfMenu);
-    self.currentSelectedMenudIndex = tapIndex;
-    [self.superview addSubview:self.bgButton];
-    [self.bgButton.superview addSubview:self];
-    NSLog(@"taped->%@",reg.view);
-    self.bgButton.hidden = NO;
-    self.currentDictionary = self.dataArray[tapIndex];
-    [self.tableView reloadData];
-    [self animateTableView:self.tableView show:YES complete:^{
-        
-    }];
+    
+    if (self.currentSelectedMenudIndex == tapIndex) {
+        [self animateTableView:self.tableView show:NO complete:^{
+            
+        }];
+        self.currentSelectedMenudIndex = -1;
+        self.bgButton.hidden  = YES;
+    } else {
+        self.currentSelectedMenudIndex = tapIndex;
+        [self.superview addSubview:self.bgButton];
+        [self.bgButton.superview addSubview:self];
+        NSLog(@"taped->%@",reg.view);
+        self.bgButton.hidden = NO;
+        self.currentDictionary = self.dataArray[self.currentSelectedMenudIndex];
+        [self.tableView reloadData];
+        [self animateTableView:self.tableView show:YES complete:^{
+            
+        }];
+    }
+    
+    
+    
+    
     
 //    for (int i = 0; i < _numOfMenu; i++) {
 //        if (i != tapIndex) {
@@ -160,6 +184,16 @@ static NSString *identifier = @"selectorMenu";
 }
 
 #pragma mark - setter&getter
+
+- (void)motifyWithSelectRow:(NSInteger)row {
+    NSMutableArray *arrayM = [NSMutableArray arrayWithArray:self.dataArray];
+    NSMutableDictionary *dict = [arrayM objectAtIndex:self.currentSelectedMenudIndex];
+    NSArray *array = [dict objectForKey:@"subTitles"];
+    [dict setObject:array[row] forKey:@"title"];
+    [arrayM replaceObjectAtIndex:self.currentSelectedMenudIndex withObject:dict];
+    self.dataArray = [arrayM copy];
+    [self configWithData:self.dataArray];
+}
 
 - (UIButton *)bgButton {
     if (_bgButton == nil) {

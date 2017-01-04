@@ -13,7 +13,7 @@
 #import "XXXFormetor.h"
 //#import "YYYFormetor.h"
 
-@interface ViewController ()<APIManagerDelegate>
+@interface ViewController ()<APIManagerDelegate, JDSelectorMenuDelegate>
 @property (nonatomic, strong) id<JDSelectProtocol> JJJReformer;
 //@property (nonatomic, strong) id<JDSelectProtocol> DDDReformer;
 @property (nonatomic, strong) JDSelectorMenu *JJJView;
@@ -49,12 +49,13 @@
 //    YYYFormetor *y = [[YYYFormetor alloc] init];
 //    self.DDDReformer = y;
     
-    
+    [self.apiManager1 requestAData];
+
 //    [self.apiManager2 requestBData];
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.apiManager1 requestAData];
-}
+    
+    }
 - (void)apiManagerDidSuccess:(APIManager *)manager {
     if (manager == self.apiManager1) {
         NSArray *reformedJJJData = [manager fetchDataWithReformer:self.JJJReformer];
@@ -68,7 +69,9 @@
 //    }
     
 }
-
+- (void)menu:(JDSelectorMenu *)menu didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%@",indexPath);
+}
 //- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 //    NSString *fileName = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
 //    FMDatabase *db = [FMDatabase databaseWithPath:fileName];
@@ -87,6 +90,7 @@
     if (_JJJView == nil) {
         
         _JJJView = [[JDSelectorMenu alloc] initWithOrigin:CGPointMake(0, 0) height:40];
+        _JJJView.delegate = self;
 //        _JJJView = [[JDSelectorMenu alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 60)];
         _JJJView.backgroundColor = [UIColor redColor];
     }
